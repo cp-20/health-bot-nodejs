@@ -1,4 +1,4 @@
-import { onValue, ref, update } from 'firebase/database';
+import { onValue, ref, remove, update } from 'firebase/database';
 import { db } from './initialize';
 
 export type sleepData = {
@@ -39,4 +39,10 @@ export const setSleepData = (data: sleepData) => {
   const sleepDataRef = ref(db, `sleep_data/${data.member}/${data.sleep_time}`);
 
   return update(sleepDataRef, data);
+};
+
+export const removeSleepData = (member: string, sleep_time: number) => {
+  const sleepDataRef = ref(db, `sleep_data/${member}/${sleep_time}`);
+
+  return remove(sleepDataRef);
 };

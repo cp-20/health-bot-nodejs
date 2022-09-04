@@ -1,6 +1,10 @@
 import type { Message } from 'discord.js';
 import { getMemberData, setMemberData } from '../firebase/memberData';
-import { getSleepData, setSleepData } from '../firebase/sleepData';
+import {
+  getSleepData,
+  removeSleepData,
+  setSleepData,
+} from '../firebase/sleepData';
 import { filterNull } from '../utils/filterNull';
 import { formatDuration } from '../utils/formatDuration';
 
@@ -86,6 +90,17 @@ export const messageCreate = async (message: Message<boolean>) => {
           for (let i = 0; i < reactions.length; i++) {
             await message.react(reactions[i]);
           }
+        });
+      } else {
+        message.react('👀');
+
+        removeSleepData(message.author.id, sleepData.sleep_time);
+
+        // -1ポイント
+        setMemberData({
+          id: message.author.id,
+          point: memberData.point - 1,
+          streak: 0,
         });
       }
     }
