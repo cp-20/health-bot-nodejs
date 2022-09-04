@@ -7,7 +7,6 @@
     "start": "node ./dist/main.js",
     "dev": "ts-node ./src/main.ts",
     "build": "tsc -p .",
-    "build:render": "npx tsc -p .",
     "build:test": "tsc -p . --noEmit"
   },
   "devDependencies": {
