@@ -96,10 +96,10 @@ export const messageCreate = async (message: Message<boolean>) => {
 
         removeSleepData(message.author.id, sleepData.sleep_time);
 
-        // -1ポイント
+        // -5ポイント
         setMemberData({
           id: message.author.id,
-          point: memberData.point - 1,
+          point: memberData.point - 5,
           streak: 0,
         });
       }
