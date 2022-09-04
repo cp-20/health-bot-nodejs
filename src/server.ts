@@ -7,7 +7,7 @@ export const init = () => {
     res.status(200).send('bot is alive');
   });
 
-  app.listen(80, () => {
+  app.listen(10000, () => {
     console.log(`server started`);
   });
 };
