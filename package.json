@@ -10,6 +10,7 @@
     "build:test": "tsc -p . --noEmit"
   },
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "@types/node": "^18.7.14",
     "ts-node": "^10.9.1",
     "typescript": "^4.8.2"
@@ -17,6 +18,7 @@
   "dependencies": {
     "discord.js": "^14.3.0",
     "dotenv": "^16.0.2",
+    "express": "^4.18.1",
     "firebase": "^9.9.4"
   }
 }
