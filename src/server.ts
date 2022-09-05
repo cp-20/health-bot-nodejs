@@ -7,7 +7,7 @@ export const init = () => {
     res.status(200).send('bot is alive');
   });
 
-  app.listen(10000, () => {
+  app.listen(process.env.PORT ?? 3001, () => {
     console.log(`server started`);
   });
 };
