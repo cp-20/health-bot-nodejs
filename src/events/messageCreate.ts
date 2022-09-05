@@ -33,10 +33,11 @@ export const messageCreate = async (message: Message<boolean>) => {
       const content = ['おやすみなさいなのだ'].filter(Boolean).join('\n');
       const reactions = filterNull([isHealthy && '🕒']);
       const streak = isHealthy ? memberData.streak : 0;
+      const sleep_time = Date.now();
 
       setSleepData({
         member: message.author.id,
-        sleep_time: Date.now(),
+        sleep_time,
         wake_time: null,
       });
 
@@ -52,6 +53,26 @@ export const messageCreate = async (message: Message<boolean>) => {
           await message.react(reactions[i]);
         }
       });
+
+      setTimeout(async () => {
+        // 起きてるかどうかを確認
+        const status = message.guild?.members.cache.get(message.author.id)
+          ?.presence?.status;
+        if (status && status !== 'offline') {
+          removeSleepData(message.author.id, sleep_time);
+
+          const memberData = await getMemberData(message.author.id);
+
+          // -5ポイント
+          setMemberData({
+            id: message.author.id,
+            point: memberData.point - 5,
+            streak: 0,
+          });
+
+          message.react('❌');
+        }
+      }, 1000 * 60 * 10);
     }
   } else {
     if (sleepData.wake_time == null) {
