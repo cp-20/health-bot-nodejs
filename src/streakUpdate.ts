@@ -10,7 +10,7 @@ const checkStreak = (client: Client, type: 'day' | 'night') => {
     if (guild === undefined) return;
 
     guild.members.cache.forEach(async (member) => {
-      const sleepData = await getSleepData(member.id, new Date());
+      const sleepData = await getSleepData(member.id);
       const memberData = await getMemberData(member.id);
 
       if (type === 'day') {

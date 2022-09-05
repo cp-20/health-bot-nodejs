@@ -7,10 +7,7 @@ export type sleepData = {
   wake_time: number | null;
 };
 
-export const getSleepData = (
-  member: string,
-  date: Date
-): Promise<sleepData | null> => {
+export const getSleepData = (member: string): Promise<sleepData | null> => {
   const sleepDataRef = ref(db, `sleep_data/${member}`);
   return new Promise((resolve) => {
     onValue(sleepDataRef, (snapshot) => {
@@ -22,7 +19,7 @@ export const getSleepData = (
         );
 
         // 1日以内なら
-        if (latestSleepTime > date.getTime() - 12 * 60 * 60 * 1000) {
+        if (latestSleepTime > Date.now() - 12 * 60 * 60 * 1000) {
           const LatestData = data[`${latestSleepTime}`];
           resolve(LatestData);
         } else {

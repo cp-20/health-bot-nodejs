@@ -22,7 +22,7 @@ export const messageCreate = async (message: Message<boolean>) => {
     Date.now() + (-540 - new Date().getTimezoneOffset()) * 60 * 1000
   );
 
-  const sleepData = await getSleepData(message.author.id, date);
+  const sleepData = await getSleepData(message.author.id);
   const memberData = await getMemberData(message.author.id);
 
   if (sleepData === null) {
@@ -36,7 +36,7 @@ export const messageCreate = async (message: Message<boolean>) => {
 
       setSleepData({
         member: message.author.id,
-        sleep_time: date.getTime(),
+        sleep_time: Date.now(),
         wake_time: null,
       });
 
@@ -58,7 +58,7 @@ export const messageCreate = async (message: Message<boolean>) => {
       if (keyword.おはよう.includes(message.content)) {
         console.log(`おはよう by ${message.author.tag}`);
 
-        const sleepDuration = date.getTime() - sleepData.sleep_time;
+        const sleepDuration = Date.now() - sleepData.sleep_time;
 
         const isEnough = sleepDuration > 7 * 60 * 60 * 1000;
         const isHealthy = 5 < date.getHours() && date.getHours() < 9;
@@ -75,7 +75,7 @@ export const messageCreate = async (message: Message<boolean>) => {
 
         setSleepData({
           ...sleepData,
-          wake_time: date.getTime(),
+          wake_time: Date.now(),
         });
 
         // (3 + 実績数 + 連続数)ポイント
