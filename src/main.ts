@@ -1,7 +1,9 @@
 require('dotenv').config();
 
 import { ActivityType, Client, Options } from 'discord.js';
+import { interactionCreate } from './events/interactionCreate';
 import { messageCreate } from './events/messageCreate';
+import { ready } from './events/ready';
 // import { presenceUpdate } from './events/presenceUpdate';
 import { init } from './server';
 import { observe } from './streakUpdate';
@@ -19,12 +21,13 @@ const client = new Client({
   makeCache: Options.cacheEverything(),
 });
 
-client.on('ready', () => {
-  console.log('Successfully logged in');
-});
+client.on('ready', ready);
 
 // メッセージ送信
 client.on('messageCreate', messageCreate);
+
+// コマンド送信
+client.on('interactionCreate', interactionCreate);
 
 // ステータス更新
 // client.on('presenceUpdate', presenceUpdate);
