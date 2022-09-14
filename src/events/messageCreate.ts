@@ -53,26 +53,6 @@ export const messageCreate = async (message: Message<boolean>) => {
           await message.react(reactions[i]);
         }
       });
-
-      setTimeout(async () => {
-        // 起きてるかどうかを確認
-        const status = message.guild?.members.cache.get(message.author.id)
-          ?.presence?.status;
-        if (status && status !== 'offline') {
-          removeSleepData(message.author.id, sleep_time);
-
-          const memberData = await getMemberData(message.author.id);
-
-          // -5ポイント
-          setMemberData({
-            id: message.author.id,
-            point: memberData.point - 5,
-            streak: 0,
-          });
-
-          message.react('❌');
-        }
-      }, 1000 * 60 * 10);
     }
   } else {
     if (sleepData.wake_time == null) {
