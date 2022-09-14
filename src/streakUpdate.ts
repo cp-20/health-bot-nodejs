@@ -41,7 +41,7 @@ const time_d = time_h * 24;
 
 export const observe = (client: Client) => {
   const date = new Date(
-    Date.now() + (-540 - new Date().getTimezoneOffset()) * 60 * 1000
+    Date.now() + (-540 - new Date().getTimezoneOffset()) * 60 * 60 * 1000
   );
   const h = date.getHours();
   const m = date.getMinutes();

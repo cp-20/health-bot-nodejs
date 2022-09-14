@@ -20,7 +20,7 @@ export const presenceUpdate = async (
     sleepData.wake_time !== null
   ) {
     const date = new Date(
-      Date.now() + (-540 - new Date().getTimezoneOffset()) * 60 * 1000
+      Date.now() + (-540 - new Date().getTimezoneOffset()) * 60 * 60 * 1000
     );
 
     // 夜なら
