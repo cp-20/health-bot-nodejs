@@ -19,7 +19,7 @@ export const messageCreate = async (message: Message<boolean>) => {
   if (message.guildId !== '503546613155758090') return;
 
   const date = new Date(
-    Date.now() + -(-540 - new Date().getTimezoneOffset()) * 60 * 60 * 1000
+    Date.now() + -(-540 - new Date().getTimezoneOffset()) * 60  * 1000
   );
 
   const sleepData = await getSleepData(message.author.id);
